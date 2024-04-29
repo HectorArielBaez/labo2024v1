@@ -51,7 +51,7 @@ campos_buenos <- setdiff(colnames(dataset), c("clase_ternaria", "clase01"))
 #--------------------------------------
 
 
-# establezco donde entreno
+# establezco donde entreno pone un 1 en la fila que va a usar para entrenar
 dataset[, train := 0L]
 dataset[foto_mes %in% PARAM$input$training, train := 1L]
 

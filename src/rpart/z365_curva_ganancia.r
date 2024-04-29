@@ -49,10 +49,10 @@ particionar <- function(data, division, agrupa = "", campo = "fold",
 #------------------------------------------------------------------------------
 # Aqui empieza el programa
 
-setwd("~/buckets/b1/") # Establezco el Working Directory
+setwd("/home/ariel/Documentos/labo24") # Establezco el Working Directory
 
 #cargo MI amada primera semilla, que esta en MI bucket
-tabla_semillas <- fread( "./datasets//mis_semillas.txt" )
+tabla_semillas <- fread( "./datasets/mis_semillas.txt" )
 ksemilla_azar <- tabla_semillas[ 1, semilla ]  # 1 es mi primera semilla
 
 # cargo el dataset
