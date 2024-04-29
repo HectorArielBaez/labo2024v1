@@ -10,11 +10,14 @@ require("yaml")
 require("data.table")
 require("ParamHelpers")
 
+#creamos el nombre del diorectorio del experimento
+experimento<-"nombre_del_experimento"
+dir.create(paste0 ("/home/ariel/Documentos/labo24/exp/", experimento), showWarnings = FALSE)
+
 # creo environment global
 envg <- env()
-
 envg$EXPENV <- list()
-envg$EXPENV$exp_dir <- paste0("~/buckets/b1/exp/", "roc_v1") #cambiando acá se cambia el directorio para los archivos de salida
+envg$EXPENV$exp_dir <- paste0 ("/home/ariel/Documentos/labo24/exp", experimento, "/")) #cambiando acá se cambia el directorio para los archivos de salida
 envg$EXPENV$wf_dir <- "~/buckets/b1/flow/"
 envg$EXPENV$wf_dir_local <- "~/flow/"
 envg$EXPENV$repo_dir <- "~/labo2024v1/"
