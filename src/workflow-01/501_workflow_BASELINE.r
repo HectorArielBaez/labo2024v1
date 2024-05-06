@@ -346,7 +346,7 @@ corrida_guantesblancos_202107 <- function( pnombrewf, pvirgen=FALSE )
   if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
 
   # Ya tengo corrido FE0001 y parto de alli
-  TS_strategy_guantesblancos_202107( "TS0012", "FE0021" )
+  TS_strategy_guantesblancos_202107( "TS0022", "FE0021" )
 
   HT_tuning_guantesblancos( "HT0022", "TS0022" )
 
