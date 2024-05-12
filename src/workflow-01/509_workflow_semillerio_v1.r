@@ -169,34 +169,14 @@ TS_strategy_baseline_202109 <- function( pmyexp, pinputexps, pserver="local")
   param_local$train$testing <- c(202107)
 
   # undersampling  baseline
-  param_local$train$undersampling <- 0.2
+  param_local$train$undersampling <- 0.5
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
 #------------------------------------------------------------------------------
-# Training Strategy baseline  202107
-
-TS_strategy_baseline_202107 <- function( pmyexp, pinputexps, pserver="local")
-{
-  if( -1 == (param_local <- exp_init( pmyexp, pinputexps, pserver ))$resultado ) return( 0 )# linea fija
-
-  param_local$meta$script <- "/src/workflow-01/z551_TS_training_strategy.r"
 
 
-  param_local$future <- c(202107)
-  param_local$final_train <- c(202105, 202104, 202103, 202102, 202101, 202012, 202011, 202010, 202009)
-
-
-  param_local$train$training <- c(202103, 202102, 202101, 202012, 202011, 202010, 202009, 202008, 202007)
-  param_local$train$validation <- c(202104)
-  param_local$train$testing <- c(202105)
-
-  # undersampling  baseline
-  param_local$train$undersampling <- 0.2
-
-  return( exp_correr_script( param_local ) ) # linea fija
-}
-#------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 # Hyperparamteter Tuning baseline
 
 HT_tuning_baseline <- function( pmyexp, pinputexps, pserver="local")
@@ -241,7 +221,7 @@ HT_tuning_baseline <- function( pmyexp, pinputexps, pserver="local")
 
     extra_trees = FALSE,
     # Quasi  baseline, el minimo learning_rate es 0.02 !!
-    learning_rate = c( 0.2, 0.5 ),
+    learning_rate = c( 0.1, 0.5 ),
     feature_fraction = c( 0.5, 0.9 ),
     num_leaves = c( 8L, 2048L,  "integer" ),
     min_data_in_leaf = c( 100L, 2000L, "integer" )
@@ -291,8 +271,8 @@ ZZ_final_semillerio_baseline <- function( pmyexp, pinputexps, pserver="local")
   # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
   param_local$modelos_rank <- c(1)
 
-  param_local$kaggle$envios_desde <-  13000L
-  param_local$kaggle$envios_hasta <- 15000L
+  param_local$kaggle$envios_desde <-  10000L
+  param_local$kaggle$envios_hasta <- 12000L
   param_local$kaggle$envios_salto <-   500L
 
   # para el caso que deba graficar
@@ -325,56 +305,18 @@ corrida_baseline_semillerio_202109 <- function( pnombrewf, pvirgen=FALSE )
   DR_drifting_baseline( "DR0001-sem", "CA0001-sem" )
   FE_historia_baseline( "FE0001-sem", "DR0001-sem" )
 
-  TS_strategy_baseline_202109( "TS0001-sem", "FE0001-sem" )
+  TS_strategy_baseline_202109( "TS0021-sem", "FE0001-sem" )
 
-  HT_tuning_baseline( "HT0001-sem", "TS0001-sem" )
+  HT_tuning_baseline( "HT0021-sem", "TS0021-sem" )
 
   # El ZZ depente de HT y TS
-  ZZ_final_semillerio_baseline( "ZZ0011-sem", c("HT0001-sem","TS0001-sem") )
+  ZZ_final_semillerio_baseline( "ZZ0021-sem", c("HT0021-sem","TS0021-sem") )
 
 
   exp_wf_end( pnombrewf, pvirgen ) # linea fija
 }
-#------------------------------------------------------------------------------
-# Este es el  Workflow baseline con semillerio
-# Que predice 202107
-# genera completas curvas de ganancia
-#   NO genera archivos para Kaggle
-# por favor notal como este script parte de FE0001
-
-
-corrida_baseline_semillerio_202107 <- function( pnombrewf, pvirgen=FALSE )
-{
-  if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
-
-  DT_incorporar_dataset_baseline( "DT0001-sem", "competencia_2024.csv.gz")
-  CA_catastrophe_baseline( "CA0001-sem", "DT0001-sem" )
-
-  DR_drifting_baseline( "DR0001-sem", "CA0001-sem" )
-  FE_historia_baseline( "FE0001-sem", "DR0001-sem" )
-
-  TS_strategy_baseline_202107( "TS0002-sem", "FE0001-sem" )
-
-  HT_tuning_baseline( "HT0002-sem", "TS0002-sem" )
-
-  # El ZZ depente de HT y TS
-  ZZ_final_semillerio_baseline( "ZZ0002-sem", c("HT0002-sem","TS0002-sem") )
-
-
-  exp_wf_end( pnombrewf, pvirgen ) # linea fija
-}
-
-#------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 #Aqui empieza el programa
 
 
 corrida_baseline_semillerio_202109( "basem01" )
-
-
-# Luego partiendo de  FE0001
-# genero TS0002, HT0002 y ZZ0002
-
-#corrida_baseline_semillerio_202107( "basem02" )
-
- 
