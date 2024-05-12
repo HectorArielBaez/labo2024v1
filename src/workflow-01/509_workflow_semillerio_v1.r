@@ -291,8 +291,8 @@ ZZ_final_semillerio_baseline <- function( pmyexp, pinputexps, pserver="local")
   # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
   param_local$modelos_rank <- c(1)
 
-  param_local$kaggle$envios_desde <-  10000L
-  param_local$kaggle$envios_hasta <- 12000L
+  param_local$kaggle$envios_desde <-  13000L
+  param_local$kaggle$envios_hasta <- 15000L
   param_local$kaggle$envios_salto <-   500L
 
   # para el caso que deba graficar
@@ -330,7 +330,7 @@ corrida_baseline_semillerio_202109 <- function( pnombrewf, pvirgen=FALSE )
   HT_tuning_baseline( "HT0001-sem", "TS0001-sem" )
 
   # El ZZ depente de HT y TS
-  ZZ_final_semillerio_baseline( "ZZ0001-sem", c("HT0001-sem","TS0001-sem") )
+  ZZ_final_semillerio_baseline( "ZZ0011-sem", c("HT0001-sem","TS0001-sem") )
 
 
   exp_wf_end( pnombrewf, pvirgen ) # linea fija
