@@ -227,7 +227,7 @@ HT_tuning_baseline <- function( pmyexp, pinputexps, pserver="local")
 
 
   # una Beyesian de Guantes Blancos, solo hace 15 iteraciones
-  param_local$bo_iteraciones <- 50 # iteraciones de la Optimizacion Bayesiana
+  param_local$bo_iteraciones <- 200 # iteraciones de la Optimizacion Bayesiana
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -243,8 +243,8 @@ ZZ_final_semillerio_baseline <- function( pmyexp, pinputexps, pserver="local")
   # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
   param_local$modelos_rank <- c(1)
 
-  param_local$kaggle$envios_desde <-  9500L
-  param_local$kaggle$envios_hasta <- 12500L
+  param_local$kaggle$envios_desde <- 13000L
+  param_local$kaggle$envios_hasta <- 14000L
   param_local$kaggle$envios_salto <-   500L
 
   # para el caso que deba graficar
